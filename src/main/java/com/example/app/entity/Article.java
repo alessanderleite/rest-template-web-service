@@ -21,6 +21,11 @@ public class Article {
 	@Column(name = "category")
 	private String category;
 
+	public Article(String title, String category) {
+		this.title = title;
+		this.category = category;
+	}
+	
 	public int getArticleId() {
 		return articleId;
 	}
