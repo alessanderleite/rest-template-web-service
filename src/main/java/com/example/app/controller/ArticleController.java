@@ -51,10 +51,16 @@ public class ArticleController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/article")
-	public ResponseEntity<Article> updateArticle(@Valid @RequestBody Article article) {
-		articleService.updateArticle(article);
-		return new ResponseEntity<>(article, HttpStatus.OK);
+	@PutMapping("/article/{id}")
+	public ResponseEntity<Article> updateArticle(@PathVariable("id") Integer id, @Valid @RequestBody Article article) {
+		Article obj = articleService.getArticleById(id);
+		if (obj == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			article.setArticleId(obj.getArticleId());
+			articleService.updateArticle(article);
+			return new ResponseEntity<>(article, HttpStatus.OK);
+		}
 	}
 	
 	@DeleteMapping("/article/{id}")

@@ -38,7 +38,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public void updateArticle(Article article) {
 		Article artcl = getArticleById(article.getArticleId());
 		artcl.setTitle(article.getTitle());
-		artcl.setCategory(artcl.getCategory());
+		artcl.setCategory(article.getCategory());
 		entityManager.flush();
 	}
 
@@ -49,7 +49,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public boolean articleExists(String title, String category) {
-		String hql = "FROM Article as atcl WHERE atcl.title = ? and atcl.category = ?";
+		String hql = "FROM Article as atcl WHERE atcl.title = ?1 and atcl.category = ?2";
 		int count = entityManager.createQuery(hql).setParameter(1, title)
 						.setParameter(2, category).getResultList().size();
 		return count > 0 ? true : false;
