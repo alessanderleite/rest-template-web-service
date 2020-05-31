@@ -20,6 +20,8 @@ public class Article {
 	
 	@Column(name = "category")
 	private String category;
+	
+	public Article() {}
 
 	public Article(String title, String category) {
 		this.title = title;
